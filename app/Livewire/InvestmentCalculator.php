@@ -13,7 +13,9 @@ class InvestmentCalculator extends Component
 
     public function increment(): void
     {
-        $this->shares++;
+        if ($this->shares < 50) {
+            $this->shares++;
+        }
     }
 
     public function decrement(): void
