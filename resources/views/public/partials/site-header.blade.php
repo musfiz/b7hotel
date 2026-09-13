@@ -34,6 +34,10 @@
 
         {{-- Desktop navbar (xl+: room for links + Call + Invest) --}}
         <nav class="hidden xl:flex items-center space-x-7 text-[13px] uppercase tracking-widest text-white/80" aria-label="Primary">
+            <a href="/" class="nav-link{{ request()->is('/') ? ' is-active' : '' }}" @if(request()->is('/')) aria-current="page" @endif>
+                <span x-show="$store.lang.current === 'en'">Home</span>
+                <span x-show="$store.lang.current === 'bn'" class="font-bengali">হোম</span>
+            </a>
             <a href="/about" class="nav-link{{ request()->is('about') ? ' is-active' : '' }}" @if(request()->is('about')) aria-current="page" @endif>
                 <span x-show="$store.lang.current === 'en'">About</span>
                 <span x-show="$store.lang.current === 'bn'" class="font-bengali">পরিচিতি</span>

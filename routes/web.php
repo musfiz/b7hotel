@@ -16,3 +16,13 @@ Route::view('/login', 'public.auth.login')->name('login');
 
 /* ============ PROTECTED — backend dashboard (design-only, no auth middleware yet) ============ */
 Route::view('/dashboard', 'protected.dashboard.index')->name('dashboard.index');
+
+Route::view('/dashboard/about', 'protected.dashboard.about')->name('dashboard.about');
+Route::view('/dashboard/project', 'protected.dashboard.project')->name('dashboard.project');
+Route::view('/dashboard/investment', 'protected.dashboard.investment')->name('dashboard.investment');
+Route::view('/dashboard/gallery', 'protected.dashboard.gallery')->name('dashboard.gallery');
+Route::view('/dashboard/contact', 'protected.dashboard.contact')->name('dashboard.contact');
+
+/* ============ PROTECTED — auth actions (design-only) ============ */
+Route::post('/logout', \App\Livewire\Actions\Logout::class)->name('logout');
+

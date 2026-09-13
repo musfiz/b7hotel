@@ -8,12 +8,12 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-brand-bg text-brand-navy antialiased font-sans">
+<body class="dashboard bg-brand-bg text-brand-navy antialiased font-sans">
 
-<div x-data="{ sidebarOpen: false }" class="min-h-screen lg:grid lg:grid-cols-[17rem_1fr]">
+<div x-data="{ sidebarOpen: false }" class="min-h-screen lg:grid lg:grid-cols-[18rem_1fr]">
 
     {{-- Mobile sidebar overlay --}}
     <div x-show="sidebarOpen" x-cloak
@@ -37,6 +37,7 @@
     </div>
 </div>
 
+@livewireScripts
 @stack('scripts')
 </body>
 </html>

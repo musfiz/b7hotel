@@ -53,7 +53,7 @@
                 <span>50</span>
             </div>
             <input type="range" min="1" max="50" x-model.number="sliderShares"
-                    class="slider-touch accent-[#7a5f0f]" aria-label="Shares slider">
+                    class="slider-touch accent-[#10b981]" aria-label="Shares slider">
         </div>
 
         <div class="mt-4 sm:mt-6 px-1 sm:px-2 flex flex-wrap justify-between items-center gap-x-4 gap-y-1 text-sm border-b border-brand-navy/5 pb-4">

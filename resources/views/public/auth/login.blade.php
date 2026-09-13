@@ -9,46 +9,14 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-white font-sans text-brand-navy antialiased">
 
-<div class="grid min-h-screen lg:grid-cols-2">
-
-    {{-- Brand panel --}}
-    <div class="relative hidden overflow-hidden bg-brand-navy-deep text-white lg:block" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1600&auto=format&fit=crop"
-             alt="" loading="lazy"
-             class="absolute inset-0 h-full w-full object-cover opacity-25">
-        <div class="absolute inset-0 bg-brand-navy-deep/70"></div>
-        <div class="relative flex h-full flex-col justify-between p-12">
-            <a href="{{ route('site.home') }}" class="font-display text-lg font-extrabold tracking-[0.18em]" aria-label="Back to website">B7<span class="text-brand-gold">HOTEL</span></a>
-            <div>
-                <p class="eyebrow-split">Admin Panel</p>
-                <p class="type-h2 mt-5 max-w-md text-balance">Manage inquiries, investors and shares — all in one place.</p>
-                <ul class="mt-8 space-y-3 text-sm text-white/75">
-                    <li class="flex items-center gap-3">
-                        @include('public.partials.icon', ['name' => 'check', 'class' => 'h-5 w-5 text-brand-gold'])
-                        Every inquiry tracked from first call to reserved share
-                    </li>
-                    <li class="flex items-center gap-3">
-                        @include('public.partials.icon', ['name' => 'check', 'class' => 'h-5 w-5 text-brand-gold'])
-                        Tier-wise pipeline with verified official records
-                    </li>
-                    <li class="flex items-center gap-3">
-                        @include('public.partials.icon', ['name' => 'check', 'class' => 'h-5 w-5 text-brand-gold'])
-                        Role-based access for advisors and management
-                    </li>
-                </ul>
-            </div>
-            <p class="text-xs uppercase tracking-[0.24em] text-white/40">Patuakhali • Bangladesh</p>
-        </div>
-    </div>
-
-    {{-- Form column --}}
-    <div class="flex items-center justify-center px-5 py-12 sm:px-10">
-        <div class="w-full max-w-md" x-data="{
+<div class="flex min-h-screen">
+    <div class="flex w-full items-center justify-center px-6 py-12 sm:px-10 lg:px-16">
+        <div class="w-full max-w-sm" x-data="{
                 loading: false,
                 show: false,
                 email: '',
@@ -61,20 +29,20 @@
                     setTimeout(() => { window.location.href = '{{ route('dashboard.index') }}'; }, 900);
                 }
             }">
-            <a href="{{ route('site.home') }}" class="font-display text-lg font-extrabold tracking-[0.18em] lg:hidden">B7<span class="text-brand-gold-deep">HOTEL</span></a>
+            <a href="{{ route('site.home') }}" class="font-display text-lg font-extrabold tracking-[0.18em]">B7<span class="text-brand-gold-deep">HOTEL</span></a>
 
-            <p class="eyebrow mt-6 lg:mt-0">Welcome back</p>
-            <h1 class="type-h2 mt-3">Sign in to your account</h1>
-            <p class="mt-3 leading-relaxed text-brand-slate">Access the admin panel to follow up on inquiries and track reservations.</p>
+            <p class="eyebrow mt-6">Welcome back</p>
+            <h1 class="type-h2 mt-2">Sign in to your account</h1>
+            <p class="mt-2 text-sm leading-relaxed text-brand-slate">Access the admin panel to follow up on inquiries and track reservations.</p>
 
-            <form class="mt-8 space-y-5" @submit.prevent="submit" novalidate>
+            <form class="mt-6 space-y-4" @submit.prevent="submit" novalidate>
                 <div>
-                    <label class="mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-brand-navy" for="login-email">Email address <span class="text-brand-gold-deep">*</span></label>
+                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-[0.18em] text-brand-navy" for="login-email">Email address <span class="text-brand-gold-deep">*</span></label>
                     <input id="login-email" type="email" x-model="email" autocomplete="username" placeholder="admin@b7hotel.com"
                            class="field" :class="error && !email ? 'border-red-500' : ''">
                 </div>
                 <div>
-                    <label class="mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-brand-navy" for="login-password">Password <span class="text-brand-gold-deep">*</span></label>
+                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-[0.18em] text-brand-navy" for="login-password">Password <span class="text-brand-gold-deep">*</span></label>
                     <div class="relative">
                         <input id="login-password" :type="show ? 'text' : 'password'" x-model="password" autocomplete="current-password" placeholder="••••••••"
                                class="field pr-12" :class="error && !password ? 'border-red-500' : ''">
@@ -84,11 +52,11 @@
                     </div>
                 </div>
 
-                <p x-show="error" x-cloak x-text="error" role="alert" class="border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700"></p>
+                <p x-show="error" x-cloak x-text="error" role="alert" class="rounded border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"></p>
 
                 <div class="flex items-center justify-between text-sm">
                     <label class="flex cursor-pointer items-center gap-2 font-semibold text-brand-slate">
-                        <input type="checkbox" checked class="h-4 w-4 accent-[#c9a227]"> Remember me
+                        <input type="checkbox" checked class="h-4 w-4 accent-[#10b981]"> Remember me
                     </label>
                     <a href="#" class="font-bold text-brand-gold-deep hover:text-brand-navy">Forgot password?</a>
                 </div>
@@ -100,14 +68,14 @@
                         Signing in…
                     </span>
                 </button>
-
-                <p class="flex items-center justify-center gap-2 border border-brand-navy/10 bg-brand-bg px-4 py-3 text-xs font-semibold text-brand-slate">
-                    @include('public.partials.icon', ['name' => 'lock', 'class' => 'h-4 w-4 shrink-0 text-brand-gold-deep'])
-                    Design preview — authentication is not wired up yet.
-                </p>
             </form>
 
-            <p class="mt-8 text-center text-sm text-brand-slate">
+            <p class="mt-4 flex items-center justify-center gap-2 rounded border border-brand-navy/10 bg-brand-bg px-3 py-2 text-xs font-semibold text-brand-slate">
+                @include('public.partials.icon', ['name' => 'lock', 'class' => 'h-4 w-4 shrink-0 text-brand-gold-deep'])
+                Design preview — authentication is not wired up yet.
+            </p>
+
+            <p class="mt-6 text-center text-sm text-brand-slate">
                 <a href="{{ route('site.home') }}" class="inline-flex items-center gap-2 font-bold text-brand-navy hover:text-brand-gold-deep">
                     @include('public.partials.icon', ['name' => 'arrow-left', 'class' => 'h-4 w-4'])
                     Back to website
