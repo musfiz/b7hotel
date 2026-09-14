@@ -4,11 +4,17 @@
         @include('public.partials.icon', ['name' => 'menu', 'class' => 'h-5 w-5'])
     </button>
 
-    {{-- Breadcrumb / Page title --}}
-    <div class="min-w-0 flex-1">
-        <h1 class="truncate font-display text-base font-extrabold text-brand-navy sm:text-lg">@yield('page-title', 'Overview')</h1>
-        <p class="hidden truncate text-xs text-brand-slate sm:block">@yield('page-subtitle', 'Welcome back — here is what is happening today.')</p>
-    </div>
+    {{-- Breadcrumb / Page title (rendered only when the page sets one) --}}
+    @hasSection('page-title')
+        <div class="min-w-0 flex-1">
+            <h1 class="truncate font-display text-base font-extrabold text-brand-navy sm:text-lg">@yield('page-title')</h1>
+            @hasSection('page-subtitle')
+                <p class="hidden truncate text-xs text-brand-slate sm:block">@yield('page-subtitle')</p>
+            @endif
+        </div>
+    @else
+        <div class="min-w-0 flex-1"></div>
+    @endif
 
     {{-- Right side actions --}}
     <div class="flex items-center gap-2 sm:gap-3"
@@ -30,7 +36,7 @@
         {{-- Search - Desktop --}}
         <label class="hidden items-center gap-2 rounded-lg border border-brand-navy/10 bg-brand-bg px-3 py-2 transition-colors focus-within:border-brand-gold/50 focus-within:ring-2 focus-within:ring-brand-gold/20 md:flex">
             @include('public.partials.icon', ['name' => 'search', 'class' => 'h-4 w-4 text-brand-slate'])
-            <input type="search" placeholder="Search..." class="w-48 bg-transparent text-sm text-brand-navy outline-none placeholder:text-brand-slate/70">
+            <input type="search" placeholder="{{ __('dashboard.topbar.search_placeholder') }}" class="w-48 bg-transparent text-sm text-brand-navy outline-none placeholder:text-brand-slate/70">
         </label>
 
         {{-- Mobile search panel --}}
@@ -38,8 +44,22 @@
              class="absolute inset-x-4 top-14 z-40 rounded-lg border border-brand-navy/10 bg-white p-3 shadow-lg md:hidden">
             <label class="flex items-center gap-2 rounded-lg border border-brand-navy/10 bg-brand-bg px-3 py-2">
                 @include('public.partials.icon', ['name' => 'search', 'class' => 'h-4 w-4 text-brand-slate'])
-                <input type="search" placeholder="Search..." class="w-full bg-transparent text-sm text-brand-navy outline-none placeholder:text-brand-slate/70">
+                <input type="search" placeholder="{{ __('dashboard.topbar.search_placeholder') }}" class="w-full bg-transparent text-sm text-brand-navy outline-none placeholder:text-brand-slate/70">
             </label>
+        </div>
+
+        {{-- Language switcher — static en | bn, server-side via session --}}
+        @php $currentLocale = app()->getLocale(); @endphp
+        <div class="flex items-center overflow-hidden rounded-lg border border-brand-navy/10" role="group" aria-label="{{ __('dashboard.locale.label') }}">
+            @foreach (\App\Http\Middleware\SetLocale::SUPPORTED as $loc)
+                <a href="{{ route('dashboard.locale', $loc) }}"
+                   hreflang="{{ $loc }}"
+                   title="{{ __('dashboard.locale.' . $loc) }}"
+                   aria-pressed="{{ $currentLocale === $loc ? 'true' : 'false' }}"
+                   class="px-2.5 py-1.5 text-xs font-bold transition-colors {{ $currentLocale === $loc ? 'bg-brand-navy text-white' : 'bg-brand-bg text-brand-slate hover:bg-brand-gold/10 hover:text-brand-gold-deep' }}">
+                    {{ $loc === 'bn' ? 'বাং' : 'EN' }}
+                </a>
+            @endforeach
         </div>
 
         {{-- Notifications --}}
@@ -62,7 +82,7 @@
                  x-transition:leave-end="opacity-0 translate-y-2 scale-95"
                  class="absolute right-0 mt-2 w-80 origin-top-right rounded-xl border border-brand-navy/10 bg-white shadow-2xl focus:outline-none">
                 <div class="flex items-center justify-between border-b border-brand-navy/10 px-4 py-3">
-                    <h3 class="text-sm font-bold text-brand-navy">Notifications</h3>
+                    <h3 class="text-sm font-bold text-brand-navy">{{ __('dashboard.topbar.notifications') }}</h3>
                     <span class="rounded bg-brand-gold/10 px-2 py-0.5 text-xs font-semibold text-brand-gold-deep">12 new</span>
                 </div>
                 <div class="max-h-80 overflow-y-auto">
@@ -142,15 +162,15 @@
                 <div class="py-2">
                     <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-brand-slate transition-colors hover:bg-brand-gold/10 hover:text-brand-gold-deep">
                         @include('public.partials.icon', ['name' => 'user', 'class' => 'h-4 w-4'])
-                        Profile
+                        {{ __('dashboard.topbar.profile') }}
                     </a>
                     <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-brand-slate transition-colors hover:bg-brand-gold/10 hover:text-brand-gold-deep">
                         @include('public.partials.icon', ['name' => 'cog', 'class' => 'h-4 w-4'])
-                        Settings
+                        {{ __('dashboard.nav.settings') }}
                     </a>
                     <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-brand-slate transition-colors hover:bg-brand-gold/10 hover:text-brand-gold-deep">
                         @include('public.partials.icon', ['name' => 'help', 'class' => 'h-4 w-4'])
-                        Help & Support
+                        {{ __('dashboard.topbar.help') }}
                     </a>
                 </div>
                 <div class="border-t border-brand-navy/10 py-2">
@@ -158,7 +178,7 @@
                         @csrf
                         <button type="submit" class="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-600 transition-colors hover:bg-red-50">
                             @include('public.partials.icon', ['name' => 'logout', 'class' => 'h-4 w-4'])
-                            Log out
+                            {{ __('dashboard.topbar.logout') }}
                         </button>
                     </form>
                 </div>

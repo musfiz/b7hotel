@@ -26,3 +26,12 @@ Route::view('/dashboard/contact', 'protected.dashboard.contact')->name('dashboar
 /* ============ PROTECTED — auth actions (design-only) ============ */
 Route::post('/logout', \App\Livewire\Actions\Logout::class)->name('logout');
 
+/* ============ Locale switcher (dashboard) — static en | bn ============ */
+Route::get('/dashboard/locale/{locale}', function (string $locale) {
+    if (in_array($locale, \App\Http\Middleware\SetLocale::SUPPORTED, true)) {
+        session(['locale' => $locale]);
+    }
+
+    return redirect()->back();
+})->name('dashboard.locale');
+

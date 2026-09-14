@@ -1,8 +1,6 @@
 @extends('protected.layouts.dashboard')
 @section('title', 'Overview | B7HOTEL Admin')
 @section('nav-active', 'overview')
-@section('page-title', 'Overview')
-@section('page-subtitle', 'Welcome back — here is what is happening today.')
 
 @section('content')
 @php

@@ -142,6 +142,22 @@ html.font-bengali h4 {
     letter-spacing: 0;
 }
 
+/* Bangla grapheme clusters (phalas, matras) break apart under wide letter-spacing —
+   keep dashboard chrome labels tight when the locale is Bengali */
+html.font-bengali .tracking-\[0\.24em\],
+html.font-bengali .tracking-\[0\.15em\],
+html.font-bengali .tracking-\[0\.12em\] {
+    letter-spacing: normal;
+}
+
+/* Slightly tighter line-height for sidebar/topbar items (body copy keeps 1.85) */
+html.font-bengali nav a,
+html.font-bengali nav button,
+html.font-bengali nav p,
+html.font-bengali aside p {
+    line-height: 1.5;
+}
+
 [x-cloak] {
     display: none !important;
 }

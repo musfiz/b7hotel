@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="font-sans">
+<html lang="{{ app()->getLocale() }}" class="{{ app()->getLocale() === 'bn' ? 'font-bengali' : 'font-sans' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
