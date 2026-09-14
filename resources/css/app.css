@@ -64,14 +64,14 @@ body {
     font-weight: 500;
 }
 .dashboard body .text-brand-slate,
-.dashboard body .text-brand-slate/80,
-.dashboard body .text-brand-slate/70,
-.dashboard body .text-brand-slate/60,
-.dashboard body .text-brand-navy/80,
-.dashboard body .text-brand-navy/60,
-.dashboard body .text-white/70,
-.dashboard body .text-white/60,
-.dashboard body .text-white/50 {
+.dashboard body .text-brand-slate\/80,
+.dashboard body .text-brand-slate\/70,
+.dashboard body .text-brand-slate\/60,
+.dashboard body .text-brand-navy\/80,
+.dashboard body .text-brand-navy\/60,
+.dashboard body .text-white\/70,
+.dashboard body .text-white\/60,
+.dashboard body .text-white\/50 {
     font-weight: 500;
 }
 .dashboard body p,
@@ -279,7 +279,7 @@ button[aria-label="Increase"] {
     white-space: nowrap;
     padding: 1.05rem 2.4rem;
     border: 1px solid transparent;
-    border-radius: 10px;
+    border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -402,7 +402,7 @@ button[aria-label="Increase"] {
     width: 100%;
     background: #ffffff;
     border: 1px solid rgb(11 25 44 / 0.14);
-    border-radius: 10px;
+    border-radius: 6px;
     padding: 0.95rem 1.1rem;
     min-height: 3rem; /* 48px touch target */
     font-size: 1rem; /* 16px — below this iOS Safari zooms on focus */
@@ -659,3 +659,119 @@ input[type="range"].slider-gold:focus-visible { outline: 2px solid #34d399; outl
 .markdown-body th, .markdown-body td { border: 1px solid rgb(11 25 44 / 0.12); padding: 0.5rem 0.75rem; text-align: left; }
 .markdown-body th { background: rgb(11 25 44 / 0.04); }
 .markdown-body hr { border-color: rgb(16 185 129 / 0.35); margin: 2rem 0; }
+
+/* ============================================================
+   B7 global loading system — stylish sea-green loader
+   Used by: Livewire backend requests, fetch/XHR via window.b7Request(),
+   image preloads, and manual window.B7Loader.show()/hide().
+   ============================================================ */
+.b7-loader-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(252 251 250 / 0.72);
+    backdrop-filter: blur(6px) saturate(120%);
+    -webkit-backdrop-filter: blur(6px) saturate(120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+/* On the navy sections the light scrim inverts so the card stays visible. */
+.b7-loader-overlay.is-dark {
+    background: rgb(11 25 44 / 0.55);
+}
+
+.b7-loader-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.b7-loader-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.75rem 2.25rem;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 24px 60px -28px rgb(11 25 44 / 0.45);
+    transform: translateY(8px) scale(0.96);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.b7-loader-overlay.is-active .b7-loader-card {
+    transform: translateY(0) scale(1);
+}
+
+.b7-loader-overlay.is-dark .b7-loader-card {
+    background: rgb(11 25 44 / 0.92);
+}
+
+/* Twin-ring spinner: a sea-green arc orbit over a soft track. */
+.b7-spinner {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 3px solid rgb(16 185 129 / 0.18);
+    border-top-color: #10b981;
+    border-right-color: #34d399;
+    animation: b7-spin 0.8s linear infinite;
+}
+
+.b7-loader-label {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #0b192c;
+}
+
+.b7-loader-overlay.is-dark .b7-loader-label {
+    color: #f9f8f6;
+}
+
+@keyframes b7-spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .b7-spinner { animation-duration: 1.6s; }
+    .b7-loader-overlay,
+    .b7-loader-card { transition: opacity 0.15s ease; }
+}
+
+/* ---- Inline spinner (small, for buttons / inline live regions) ---- */
+.b7-spinner-sm {
+    display: inline-block;
+    width: 1.1em;
+    height: 1.1em;
+    border-radius: 999px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    vertical-align: -0.16em;
+    animation: b7-spin 0.7s linear infinite;
+}
+
+/* ---- Lazy image shimmer (loading state for <img b7-lazy>) ---- */
+.b7-lazy {
+    background: linear-gradient(100deg, rgb(11 25 44 / 0.06) 30%, rgb(11 25 44 / 0.12) 50%, rgb(11 25 44 / 0.06) 70%);
+    background-size: 200% 100%;
+    animation: b7-shimmer 1.4s ease-in-out infinite;
+    transition: opacity 0.5s ease;
+}
+
+.b7-lazy.is-loaded {
+    background: none;
+    animation: none;
+}
+
+@keyframes b7-shimmer {
+    to { background-position: -200% 0; }
+}

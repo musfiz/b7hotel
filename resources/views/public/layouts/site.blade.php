@@ -26,6 +26,8 @@
 
     @include('public.partials.site-footer')
 
+    @include('public.partials.loader')
+
     {{-- Sticky mobile CTA (docs §27): safe-area aware, thumb-sized, works from every page --}}
     <div class="fixed bottom-0 inset-x-0 z-40 md:hidden grid grid-cols-2 border-t border-white/10 pb-[env(safe-area-inset-bottom)]">
         <a href="tel:01XXXXXXXXX" class="flex min-h-[54px] items-center justify-center bg-brand-navy text-white font-display text-xs font-bold uppercase tracking-[0.2em]">Call</a>
@@ -47,6 +49,7 @@
         });
     </script>
     @livewireScripts
+    @vite('resources/js/b7-loader.js')
     @stack('scripts')
 </body>
 </html>

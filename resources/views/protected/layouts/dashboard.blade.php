@@ -37,7 +37,10 @@
     </div>
 </div>
 
+@include('public.partials.loader')
+
 @livewireScripts
+@vite('resources/js/b7-loader.js')
 @stack('scripts')
 </body>
 </html>
