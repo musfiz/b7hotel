@@ -10,9 +10,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/b7-loader.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-white font-sans text-brand-navy antialiased">
+
+@include('public.partials.preloader')
 
 {{-- ============================================================
      Sign-in form — single centered column
@@ -28,7 +30,6 @@
                     this.error = '';
                     if (!this.email || !this.password) { this.error = 'Please enter both email and password.'; return; }
                     this.loading = true;
-                    if (window.B7Loader) window.B7Loader.show('Signing in…');
                     setTimeout(() => { window.location.href = '{{ route('dashboard.index') }}'; }, 900);
                 }
             }">
@@ -98,8 +99,6 @@
             </p>
     </div>
 </main>
-
-@include('public.partials.loader')
 
 @stack('scripts')
 </body>

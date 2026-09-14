@@ -18,6 +18,8 @@
 </head>
 <body class="bg-brand-bg text-brand-navy antialiased scroll-smooth font-sans">
 
+    @include('public.partials.preloader')
+
     @include('public.partials.site-header')
 
     <main>
@@ -25,8 +27,6 @@
     </main>
 
     @include('public.partials.site-footer')
-
-    @include('public.partials.loader')
 
     {{-- Sticky mobile CTA (docs §27): safe-area aware, thumb-sized, works from every page --}}
     <div class="fixed bottom-0 inset-x-0 z-40 md:hidden grid grid-cols-2 border-t border-white/10 pb-[env(safe-area-inset-bottom)]">
@@ -49,7 +49,6 @@
         });
     </script>
     @livewireScripts
-    @vite('resources/js/b7-loader.js')
     @stack('scripts')
 </body>
 </html>

@@ -13,6 +13,8 @@
 </head>
 <body class="dashboard bg-brand-bg text-brand-navy antialiased font-sans">
 
+@include('public.partials.preloader')
+
 <div x-data="{ sidebarOpen: false }" class="min-h-screen lg:grid lg:grid-cols-[18rem_1fr]">
 
     {{-- Mobile sidebar overlay --}}
@@ -37,10 +39,7 @@
     </div>
 </div>
 
-@include('public.partials.loader')
-
 @livewireScripts
-@vite('resources/js/b7-loader.js')
 @stack('scripts')
 </body>
 </html>
